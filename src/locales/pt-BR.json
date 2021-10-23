@@ -13,6 +13,14 @@
   "components": {
     "snackbar": {
       "close": "X"
-    }
+    },
+    "login_form": {
+  		"login_btn": "Entrar",
+      "forgot_password": "Esqueci minha senha",
+      "password": {
+        "show": "MOSTRAR",
+        "hide": "ESCONDER"
+      }
+  	}
   }
 }
