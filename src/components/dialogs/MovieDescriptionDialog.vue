@@ -3,6 +3,7 @@
     v-model="dialog"
     transition="dialog-bottom-transition"
     max-width="800"
+    @click:outside="changeDialog"
   >
     <template>
       <v-card class="movie-description-dialog">
@@ -68,10 +69,6 @@
 <script>
 export default {
   name: 'MovieDescriptionDialog',
-  model: {
-    prop: 'dialog',
-    event: 'change',
-  },
   props: {
     movie: {
       default: {
@@ -114,6 +111,9 @@ export default {
         this.disabled = false;
         this.$emit('hasLists', this.movie.id);
       }, 800);
+    },
+    changeDialog() {
+      this.$emit('cgDialog');
     }
   }
 }

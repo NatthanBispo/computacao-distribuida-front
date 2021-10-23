@@ -9,6 +9,11 @@ const getters = {
 };
 
 const actions = {
+  indexFavorite({ commit }) {
+    Favorite.index().then((response) => {
+      commit('setFavorites', response);
+    });
+  },
   handleFavorite({ commit }, payload) {
     Favorite.handle(payload).then((response) => {
       commit('setFavorites', response);

@@ -2,24 +2,22 @@
   <div
     class="movies"
   >
-    Filmes populares
-    <v-row>
-      <div
-        v-for="movie in movies"
-        :key="movie.id"
-        @click="openDialog(movie)"
-      >
-        <Card :movie="movie"/>
-      </div>
-    </v-row>
+    <div
+      v-for="movie in movies"
+      :key="movie.id"
+      @click="openDialog(movie)"
+    >
+      <Card :movie="movie"/>
+    </div>
     <MovieDescriptionDialog
-      v-model="dialog"
+      :dialog="dialog"
       :movie="movie"
       :hasMoviesLists="getHasMoviesLists"
       @favorite="doFavorite"
       @watchLater="doWatchLater"
       @watched="doWatched"
       @hasLists="doHasLists"
+      @cgDialog="changeDialog"
     />
   </div>
 </template>
@@ -71,6 +69,9 @@ export default {
     },
     doWatched(movieId) {
       this.handleWatched(movieId);
+    },
+    changeDialog() {
+      this.dialog = !this.dialog;
     }
   }
 }
@@ -78,6 +79,8 @@ export default {
 
 <style lang="scss">
 .movies {
-  margin: 100px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 }
 </style>

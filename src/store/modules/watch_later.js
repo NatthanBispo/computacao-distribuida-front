@@ -5,10 +5,15 @@ const state = {
 };
 
 const getters = {
-  getWatchLater: () => (state.watchLater),
+  getWatchLater: () => (state.watchLaters),
 };
 
 const actions = {
+  indexWatchLater({ commit }) {
+    WatchLater.index().then((response) => {
+      commit('setWatchLater', response);
+    });
+  },
   handleWatchLater({ commit }, payload) {
     WatchLater.handle(payload).then((response) => {
       commit('setWatchLater', response);

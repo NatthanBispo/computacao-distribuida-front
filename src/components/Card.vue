@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mx-2 my-12"
+    class="mx-4 mb-12"
     max-width="280"
     min-height="540"
   >
@@ -43,9 +43,6 @@ export default {
       default: () => {},
     },
   },
-  data: () => ({
-    show: false,
-  }),
 }
 </script>
 

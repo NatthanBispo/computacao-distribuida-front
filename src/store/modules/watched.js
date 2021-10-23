@@ -9,6 +9,11 @@ const getters = {
 };
 
 const actions = {
+  indexWatched({ commit }) {
+    Watched.index().then((response) => {
+      commit('setWatcheds', response);
+    });
+  },
   handleWatched({ commit }, payload) {
     Watched.handle(payload).then((response) => {
       commit('setWatcheds', response);
