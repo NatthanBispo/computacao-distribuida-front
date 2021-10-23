@@ -13,14 +13,20 @@
       </div>
     </v-row>
     <MovieDescriptionDialog
-      v-model="dialogDriver"
-      :dialog="dialog"
+      v-model="dialog"
       :movie="movie"
+      :hasMoviesLists="getHasMoviesLists"
+      @favorite="doFavorite"
+      @watchLater="doWatchLater"
+      @watched="doWatched"
+      @hasLists="doHasLists"
     />
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'Movies',
   props: {
@@ -34,13 +40,37 @@ export default {
     MovieDescriptionDialog: () => import('@/components/dialogs/MovieDescriptionDialog.vue'),
   },
   data: () => ({
-    dialogDriver: false,
+    dialog: false,
     movie: {},
   }),
+  computed: {
+    ...mapGetters([
+      'getHasMoviesLists'
+    ]),
+  },
   methods: {
+    ...mapActions([
+      'fetchHasLists',
+      'handleFavorite',
+      'handleWatchLater',
+      'handleWatched',
+    ]),
+    doHasLists(movieId) {
+      this.fetchHasLists({ movie_id: movieId });
+    },
     openDialog(movie) {
       this.movie = movie;
-      this.dialogDriver = true;
+      this.fetchHasLists({ movie_id: movie.id });
+      this.dialog = true;
+    },
+    doFavorite(movieId) {
+      this.handleFavorite(movieId);
+    },
+    doWatchLater(movieId) {
+      this.handleWatchLater(movieId);
+    },
+    doWatched(movieId) {
+      this.handleWatched(movieId);
     }
   }
 }

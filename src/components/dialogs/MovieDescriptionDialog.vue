@@ -3,7 +3,6 @@
     v-model="dialog"
     transition="dialog-bottom-transition"
     max-width="800"
-    :change="closeModal()"
   >
     <template>
       <v-card class="movie-description-dialog">
@@ -34,12 +33,29 @@
 
             <v-card-actions class="justify-center pb-8">
               <v-chip-group
-                  v-model="selection"
                   active-class="deep-purple accent-4 white--text"
                 >
-                  <v-chip>Favoritos</v-chip>
-                  <v-chip>Assistir depois</v-chip>
-                  <v-chip>Assistidos</v-chip>
+                  <v-chip
+                    v-model="hasMoviesLists.is_favorite"
+                    @click="doFavorite"
+                    :disabled="disabled"
+                  >
+                    Favoritos
+                  </v-chip>
+                  <v-chip
+                    v-model="hasMoviesLists.is_watch_later"
+                    @click="doWatchLater"
+                    :disabled="disabled"
+                  >
+                    Assistir depois
+                  </v-chip>
+                  <v-chip
+                    v-model="hasMoviesLists.is_watched"
+                    @click="doWatched"
+                    :disabled="disabled"
+                  >
+                    Assistidos
+                  </v-chip>
                 </v-chip-group>
             </v-card-actions>
           </v-col>
@@ -58,18 +74,47 @@ export default {
   },
   props: {
     movie: {
-      type: Object,
-      default: () => {}
+      default: {
+        poster_path: '',
+        title: '',
+        overview: '',
+      }
     },
     dialog: {
       type: Boolean,
       default: false,
     },
+    hasMoviesLists: {
+      default: {
+        is_favorite: false,
+        is_watch_later: false,
+        is_watched: false,
+      },
+    }
   },
+  data: () => ({
+    disabled: false,
+  }),
   methods: {
-    closeModal() {
-      this.$emit('change', this.dialog);
+    doFavorite() {
+      this.$emit('favorite', this.movie.id)
+      this.loadingBlockAction();
     },
+    doWatchLater() {
+      this.$emit('watchLater', this.movie.id)
+      this.loadingBlockAction();
+    },
+    doWatched() {
+      this.$emit('watched', this.movie.id)
+      this.loadingBlockAction();
+    },
+    loadingBlockAction() {
+      this.disabled = true;
+      setTimeout(() => {
+        this.disabled = false;
+        this.$emit('hasLists', this.movie.id);
+      }, 800);
+    }
   }
 }
 </script>

@@ -1,7 +1,8 @@
 import ApiService from '../api.service';
 
 const MoviesResource = {
-  fetch_popular: () => ApiService.get('v1/movies/fetch_popular'),
+  fetchPopular: () => ApiService.get('v1/movies/fetch_popular'),
+  myLists: (params) => ApiService.query('v1/movies/my_lists', params),
 };
 
 export default MoviesResource;
