@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import Loading from './modules/loading';
+import Snackbar from './modules/snackbar';
+import Error from './modules/error';
 import Session from './modules/session';
 import User from './modules/user';
 import Movie from './modules/movie';
@@ -14,6 +16,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     Loading,
+    Snackbar,
+    Error,
     Session,
     User,
     Movie,

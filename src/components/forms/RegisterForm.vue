@@ -3,6 +3,14 @@
     <v-form
       @keyup.native.enter="executeLogin"
     >
+      <v-text-field
+        v-model="name"
+        label="Nome"
+        type="email"
+        outlined
+        color="white"
+        :error-messages="errors"
+      />
       <ValidationProvider
         v-slot="{errors}"
         name="email"
@@ -43,9 +51,9 @@
           block
           large
           color="#00FF7F"
-          @click="executeLogin"
+          @click="executeRegister"
         >
-          ENTRAR
+          cadastrar
         </v-btn>
 
         <v-btn
@@ -53,9 +61,9 @@
           block
           large
           outlined
-          @click="goToRegister"
+          @click="goToLogin"
         >
-          ir para o cadastro
+          ir para o login
         </v-btn>
       </div>
     </v-form>
@@ -64,7 +72,7 @@
 
 <script>
 export default {
-  name: 'LoginForm',
+  name: 'RegisterForm',
   data() {
     return {
       email: '',
@@ -85,15 +93,20 @@ export default {
     },
   },
   methods: {
-    executeLogin() {
-      const managerData = { email: this.email, password: this.password };
+    executeRegister() {
+      const managerData = {
+        name: this.name,
+        email: this.email,
+        password: this.password
+      };
       this.$emit('submited', managerData);
     },
+
     changePassword() {
       this.showPassword = !this.showPassword;
     },
-    goToRegister() {
-      this.$router.push('/register');
+    goToLogin() {
+      this.$router.push('/login');
     }
   },
 };

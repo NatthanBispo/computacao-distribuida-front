@@ -3,8 +3,14 @@
     class="movies"
   >
     <div
+      v-if="movies.length == 0"
+      class="text-h4"
+    >
+      Essa lista esta vazia
+    </div>
+    <div
       v-for="movie in movies"
-      :key="movie.id"
+      :key="movie.api_id"
       @click="openDialog(movie)"
     >
       <Card :movie="movie"/>
@@ -58,7 +64,7 @@ export default {
     },
     openDialog(movie) {
       this.movie = movie;
-      this.fetchHasLists({ movie_id: movie.id });
+      this.fetchHasLists({ movie_id: movie.api_id });
       this.dialog = true;
     },
     doFavorite(movieId) {

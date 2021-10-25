@@ -1,4 +1,5 @@
 import User from '@/api/resources/users';
+import routes from '@/routes/appRoutes';
 
 const state = {
   user: null,
@@ -16,15 +17,13 @@ const actions = {
       dispatch('removeLoading');
     });
   },
-
-  register({ commit, dispatch }, payload) {
-    User.register(payload).then((response) => {
-      commit('setUser', response);
-      dispatch('createSession', response);
+  register({ dispatch }, payload) {
+    User.register(payload).then(() => {
+      dispatch('addSuccessMessage', 'Usuario criado com sucesso');
+      routes.push('/login');
       dispatch('removeLoading');
     });
   },
-
 };
 
 const mutations = {

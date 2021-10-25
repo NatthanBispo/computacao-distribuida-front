@@ -94,22 +94,22 @@ export default {
   }),
   methods: {
     doFavorite() {
-      this.$emit('favorite', this.movie.id)
+      this.$emit('favorite', this.movie.api_id)
       this.loadingBlockAction();
     },
     doWatchLater() {
-      this.$emit('watchLater', this.movie.id)
+      this.$emit('watchLater', this.movie.api_id)
       this.loadingBlockAction();
     },
     doWatched() {
-      this.$emit('watched', this.movie.id)
+      this.$emit('watched', this.movie.api_id)
       this.loadingBlockAction();
     },
     loadingBlockAction() {
       this.disabled = true;
       setTimeout(() => {
         this.disabled = false;
-        this.$emit('hasLists', this.movie.id);
+        this.$emit('hasLists', this.movie.api_id);
       }, 800);
     },
     changeDialog() {
@@ -133,7 +133,7 @@ export default {
   }
 
   .description {
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 300px;
   }
 
