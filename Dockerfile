@@ -12,15 +12,6 @@ COPY package*.json ./
 # install project dependencies
 RUN npm install
 
-ARG VUE_APP_I18N_LOCALE
-ENV VUE_APP_I18N_LOCALE $VUE_APP_I18N_LOCALE
-
-ARG VUE_APP_I18N_FALLBACK_LOCALE
-ENV VUE_APP_I18N_FALLBACK_LOCALE $VUE_APP_I18N_FALLBACK_LOCALE
-
-ARG VUE_APP_API_URL
-ENV VUE_APP_API_URL $VUE_APP_API_URL
-
 # copy project files and folders to the current working directory (i.e. 'app' folder)
 COPY . .
 
