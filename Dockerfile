@@ -12,14 +12,11 @@ COPY package*.json ./
 # install project dependencies
 RUN npm install
 
-# copy project files and folders to the current working directory (i.e. 'app' folder)
-COPY . .
-
 ARG VUE_APP_API_URL
 ENV VUE_APP_API_URL $VUE_APP_API_URL
 
-# build app for production with minification
-RUN npm run build
+# copy project files and folders to the current working directory (i.e. 'app' folder)
+COPY . .
 
 EXPOSE 8080:8080
 
