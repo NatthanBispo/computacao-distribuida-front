@@ -1,28 +1,35 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-main>
+      <Router-View />
+    </v-main>
+    <Loading />
+    <Snackbar />
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    Loading: () => import('@/components/feedbacks/Loading.vue'),
+    Snackbar: () => import('@/components/feedbacks/Snackbar.vue'),
+  },
+  computed: {
+    ...mapGetters([
+      'hasSession',
+    ]),
+  },
+  watch: {
+    hasSession(hasSession) {
+      if (!hasSession) {
+        this.$router.push('/login');
+      } else {
+        this.$router.push('/home');
+      }
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

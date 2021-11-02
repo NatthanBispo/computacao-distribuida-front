@@ -1,0 +1,26 @@
+{
+  "message": "hello i18n !!",
+  "app_name": "Computacao Distribuida Front",
+  "errors": {
+  	"default_error": "Algo deu errado ao processar sua requisição",
+  	"session_expired": "Você foi desconectado",
+    "not_found_error": "Não encontrado"
+  },
+  "successes": {
+  },
+  "views": {
+  },
+  "components": {
+    "snackbar": {
+      "close": "X"
+    },
+    "login_form": {
+  		"login_btn": "Entrar",
+      "forgot_password": "Esqueci minha senha",
+      "password": {
+        "show": "MOSTRAR",
+        "hide": "ESCONDER"
+      }
+  	}
+  }
+}
